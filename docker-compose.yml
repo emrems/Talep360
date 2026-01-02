@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  # C# - Talep Servisi
+  talep-api:
+    build:
+      context: .
+      dockerfile: Services/TalepService/Dockerfile
+    container_name: talep-api
+    ports:
+      - "5001:8080"
+    depends_on:
+      - postgres-db # Veritabanı kalkmadan API kalkmasın
+    networks:
+      - talep360-network
+
+  # C# - Ocelot Gateway
+  ocelot-gateway:
+    build:
+      context: .
+      dockerfile: Services/OcelotGateway/Dockerfile
+    container_name: ocelot-api
+    ports:
+      - "5000:8080"
+    depends_on:
+      - talep-api
+    networks:
+      - talep360-network
+
+  # PostgreSQL - Ana Veritabanı
+  postgres-db:
+    image: postgres:15
+    container_name: talep360-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: talep360db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Veriler burada saklanacak
+    networks:
+      - talep360-network
+
+  # Portainer - Yönetim Paneli
+  portainer:
+    image: portainer/portainer-ce:latest
+    container_name: talep360-management-panel
+    restart: always
+    ports:
+      - "9001:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - portainer_data:/data
+
+networks:
+  talep360-network:
+    driver: bridge
+
+volumes:
+  portainer_data:
+  postgres_data: # PostgreSQL için kalıcı depo
