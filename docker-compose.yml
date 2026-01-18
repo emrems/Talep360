@@ -1,7 +1,50 @@
 version: '3.8'
 
 services:
-  # C# - Talep Servisi
+  # --- AUTHENTICATION SERVICE (PORT: 5002, DB PORT: 5433) ---
+  auth-db:
+    image: postgres:15
+    container_name: auth-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5433:5432"
+    volumes:
+      - auth_data:/var/lib/postgresql/data
+    networks:
+      - talep360-network
+
+  auth-api:
+    build:
+      context: .
+      dockerfile: Services/TalepAuthentication/Dockerfile
+    container_name: auth-api
+    ports:
+      - "5002:8080"
+    depends_on:
+      - auth-db
+    networks:
+      - talep360-network
+
+  # --- TALEP SERVICE (PORT: 5001, DB PORT: 5434) ---
+  talep-db:
+    image: postgres:15
+    container_name: talep-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: ticket_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password123
+    ports:
+      - "5434:5432"
+    volumes:
+      - ticket_data:/var/lib/postgresql/data
+    networks:
+      - talep360-network
+
   talep-api:
     build:
       context: .
@@ -10,11 +53,11 @@ services:
     ports:
       - "5001:8080"
     depends_on:
-      - postgres-db # Veritabanı kalkmadan API kalkmasın
+      - talep-db
     networks:
       - talep360-network
 
-  # C# - Ocelot Gateway
+  # --- OCELOT GATEWAY (PORT: 5000) ---
   ocelot-gateway:
     build:
       context: .
@@ -23,27 +66,12 @@ services:
     ports:
       - "5000:8080"
     depends_on:
+      - auth-api
       - talep-api
     networks:
       - talep360-network
 
-  # PostgreSQL - Ana Veritabanı
-  postgres-db:
-    image: postgres:15
-    container_name: talep360-postgres
-    restart: always
-    environment:
-      POSTGRES_DB: talep360db
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: password123
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data # Veriler burada saklanacak
-    networks:
-      - talep360-network
-
-  # Portainer - Yönetim Paneli
+  # --- YÖNETİM PANELİ ---
   portainer:
     image: portainer/portainer-ce:latest
     container_name: talep360-management-panel
@@ -59,5 +87,6 @@ networks:
     driver: bridge
 
 volumes:
+  auth_data:
+  ticket_data:
   portainer_data:
-  postgres_data: # PostgreSQL için kalıcı depo

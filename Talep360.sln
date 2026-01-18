@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.1.11304.174 d18.0
+VisualStudioVersion = 18.1.11304.174
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{5854FF58-B8C5-05C6-5BF2-ACE42193F22B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalepService", "Services\TalepService\TalepService.csproj", "{EFAA4532-2B53-44EC-8467-82B1E0145884}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotGateway", "Services\OcelotGateway\OcelotGateway.csproj", "{86EACD50-A046-4BA1-9B5C-C27792B99BF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalepAuthentication", "Services\TalepAuthentication\TalepAuthentication.csproj", "{266A5DAC-A14F-5203-2550-8DC7455B6388}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,18 @@ Global
 		{86EACD50-A046-4BA1-9B5C-C27792B99BF0}.Release|x64.Build.0 = Release|Any CPU
 		{86EACD50-A046-4BA1-9B5C-C27792B99BF0}.Release|x86.ActiveCfg = Release|Any CPU
 		{86EACD50-A046-4BA1-9B5C-C27792B99BF0}.Release|x86.Build.0 = Release|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Debug|x64.Build.0 = Debug|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Debug|x86.Build.0 = Debug|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Release|Any CPU.Build.0 = Release|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Release|x64.ActiveCfg = Release|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Release|x64.Build.0 = Release|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Release|x86.ActiveCfg = Release|Any CPU
+		{266A5DAC-A14F-5203-2550-8DC7455B6388}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +64,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{EFAA4532-2B53-44EC-8467-82B1E0145884} = {5854FF58-B8C5-05C6-5BF2-ACE42193F22B}
 		{86EACD50-A046-4BA1-9B5C-C27792B99BF0} = {5854FF58-B8C5-05C6-5BF2-ACE42193F22B}
+		{266A5DAC-A14F-5203-2550-8DC7455B6388} = {5854FF58-B8C5-05C6-5BF2-ACE42193F22B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8094C9BB-CE67-4C53-9268-1E1DEE526E65}
