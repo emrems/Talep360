@@ -1,6 +1,6 @@
-﻿namespace TalepService.Entities
+namespace TalepService.Entities
 {
-    public class Attachment
+    public class Attachment : ISoftDeletable
     {
         public int Id { get; set; }
         public int TicketId { get; set; }

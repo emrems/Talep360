@@ -61,6 +61,40 @@
       "Priority": 1
     },
     {
+      "DownstreamPathTemplate": "/api/Role/users-in-role",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/users-in-role",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/workload-stats",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/ticket/workload-stats",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
         "DownstreamPathTemplate": "/{everything}",
         "DownstreamScheme": "http",
         "DownstreamHostAndPorts": [

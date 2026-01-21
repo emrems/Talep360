@@ -7,5 +7,6 @@ namespace TalepAuthentication.Interfaces
     {
         Task<BaseResponse<bool>> AssignRoleAsync(AssignRoleDto assignRoleDto);
         Task<BaseResponse<IList<string>>> GetUserRolesAsync(string email);
+        Task<BaseResponse<List<UserDto>>> GetUsersInRoleAsync(string roleName);
     }
 }

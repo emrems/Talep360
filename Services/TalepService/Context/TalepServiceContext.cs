@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using TalepService.Entities;
 
 namespace TalepService.Context
@@ -39,6 +39,11 @@ namespace TalepService.Context
                 entity.HasKey(e => e.Id);
                 entity.Property(e => e.FilePath).IsRequired();
             });
+
+            // Global Query Filter (Soft Delete)
+            // ISoftDeletable implement eden tüm entityler için otomatik filtre
+            modelBuilder.Entity<Ticket>().HasQueryFilter(e => !e.IsDeleted);
+            modelBuilder.Entity<Attachment>().HasQueryFilter(e => !e.IsDeleted);
         }
     }
 }

@@ -32,6 +32,12 @@ namespace TalepAuthentication.DbContext
                     Id = 3,
                     Name = "User",
                     NormalizedName = "USER"
+                },
+                new IdentityRole<int>
+                {
+                    Id = 5,
+                    Name = "Staff",
+                    NormalizedName = "STAFF"
                 }
             );
 

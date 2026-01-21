@@ -1,8 +1,8 @@
-﻿using TalepService.Enums;
+using TalepService.Enums;
 
 namespace TalepService.Entities
 {
-    public class Ticket
+    public class Ticket : ISoftDeletable
     {
         public int Id { get; set; }
         public int TenantId { get; set; } // Çoklu müşteri (Multi-tenant) yapısı için
