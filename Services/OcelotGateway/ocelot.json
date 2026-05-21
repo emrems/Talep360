@@ -9,7 +9,7 @@
           "Port": 5193
         }
       ],
-      "UpstreamPathTemplate": "/auth/login",
+      "UpstreamPathTemplate": "/api/Auth/login",
       "UpstreamHttpMethod": [ "POST" ],
       "Priority": 1
     },
@@ -22,7 +22,7 @@
           "Port": 5193
         }
       ],
-      "UpstreamPathTemplate": "/auth/register",
+      "UpstreamPathTemplate": "/api/Auth/register",
       "UpstreamHttpMethod": [ "POST" ],
       "Priority": 1
     },
@@ -35,7 +35,7 @@
           "Port": 5193
         }
       ],
-      "UpstreamPathTemplate": "/auth/assign-role",
+      "UpstreamPathTemplate": "/api/Role/assign-role",
       "UpstreamHttpMethod": [ "POST" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -52,7 +52,7 @@
           "Port": 5193
         }
       ],
-      "UpstreamPathTemplate": "/auth/get-user-roles",
+      "UpstreamPathTemplate": "/api/Role/get-user-roles",
       "UpstreamHttpMethod": [ "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
@@ -69,13 +69,234 @@
           "Port": 5193
         }
       ],
-      "UpstreamPathTemplate": "/auth/users-in-role",
+      "UpstreamPathTemplate": "/api/Role/users-in-role",
       "UpstreamHttpMethod": [ "GET" ],
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer",
         "AllowedScopes": []
       },
       "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/Tenant/create",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Tenant/create",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/Tenant/update",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Tenant/update",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/Tenant/delete/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Tenant/delete/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/Tenant/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Tenant/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/create",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User/create",
+      "UpstreamHttpMethod": [ "POST" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/list",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User/list",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/tenant/{tenantId}/users",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User/tenant/{tenantId}/users",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/update",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User/update",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/User/delete/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/User/delete/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+      "DownstreamPathTemplate": "/api/Tenant/list",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 5193
+        }
+      ],
+      "UpstreamPathTemplate": "/api/Tenant/list",
+      "UpstreamHttpMethod": [ "GET" ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/my-tickets",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/my-tickets",
+        "UpstreamHttpMethod": [ "GET" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/assigned-to-me",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/assigned-to-me",
+        "UpstreamHttpMethod": [ "GET" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/tenant-tickets",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/tenant-tickets",
+        "UpstreamHttpMethod": [ "GET" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
     },
     {
         "DownstreamPathTemplate": "/api/Ticket/workload-stats",
@@ -88,6 +309,159 @@
         ],
         "UpstreamPathTemplate": "/api/ticket/workload-stats",
         "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}/reject",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}/reject",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}/assign/{userId}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}/assign/{userId}",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}/accept-assignment",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}/accept-assignment",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}/resolve",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}/resolve",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}/close",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}/close",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}/request-info",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}/request-info",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}/reply",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}/reply",
+        "UpstreamHttpMethod": [ "POST" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket",
+        "UpstreamHttpMethod": [ "GET", "POST", "PUT" ],
+        "AuthenticationOptions": {
+            "AuthenticationProviderKey": "Bearer",
+            "AllowedScopes": []
+        },
+        "Priority": 1
+    },
+    {
+        "DownstreamPathTemplate": "/api/Ticket/{id}",
+        "DownstreamScheme": "http",
+        "DownstreamHostAndPorts": [
+            {
+                "Host": "localhost",
+                "Port": 5076
+            }
+        ],
+        "UpstreamPathTemplate": "/api/Ticket/{id}",
+        "UpstreamHttpMethod": [ "GET", "DELETE" ],
         "AuthenticationOptions": {
             "AuthenticationProviderKey": "Bearer",
             "AllowedScopes": []

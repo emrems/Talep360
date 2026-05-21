@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 
 namespace TalepAuthentication.Entities
 {
@@ -9,6 +9,7 @@ namespace TalepAuthentication.Entities
         public int TenantId { get; set; }
        
         public string FullName { get; set; } = null!; 
+        public string? Title { get; set; }
         public bool IsActive { get; set; } = true;
         public DateTime CreatedAtUtc { get; set; }
         public bool IsDeleted { get; set; }

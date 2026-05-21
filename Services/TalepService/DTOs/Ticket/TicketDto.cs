@@ -13,6 +13,8 @@ namespace TalepService.DTOs.Ticket
         public TicketStatus Status { get; set; }
         public int CreatedBy { get; set; }
         public int? AssignedTo { get; set; }
+        public bool? IsAssignmentApproved { get; set; }
+        public string? RejectReason { get; set; }
         public DateTime CreatedAtUtc { get; set; }
         public DateTime? ClosedAtUtc { get; set; }
         public List<AttachmentDto> Attachments { get; set; } = new();

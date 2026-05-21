@@ -6,6 +6,6 @@ namespace TalepAuthentication.Interfaces
 {
     public interface IJwtService
     {
-        TokenDto GenerateToken(User user, IList<string> roles);
+        TokenDto GenerateToken(User user, IList<string> roles, string tenantName);
     }
 }

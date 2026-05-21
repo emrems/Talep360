@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using TalepAuthentication.DbContext;
 using TalepAuthentication.DTOs;
 using TalepAuthentication.Entities;
 using TalepAuthentication.Interfaces;
@@ -11,12 +13,14 @@ namespace TalepAuthentication.Services
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IJwtService _jwtService;
+        private readonly AppDbContext _context;
 
-        public AuthService(UserManager<User> userManager, SignInManager<User> signInManager, IJwtService jwtService)
+        public AuthService(UserManager<User> userManager, SignInManager<User> signInManager, IJwtService jwtService, AppDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtService = jwtService;
+            _context = context;
         }
 
         public async Task<BaseResponse<TokenDto>> LoginAsync(LoginDto loginDto)
@@ -34,7 +38,20 @@ namespace TalepAuthentication.Services
             }
 
             var roles = await _userManager.GetRolesAsync(user);
-            var token = _jwtService.GenerateToken(user, roles);
+            
+            var tenant = await _context.Tenants
+                .Where(t => t.Id == user.TenantId)
+                .Select(t => new { t.Name, t.IsActive })
+                .FirstOrDefaultAsync();
+
+            if (tenant != null && !tenant.IsActive)
+            {
+                return BaseResponse<TokenDto>.Fail("Şirket hesabınız pasif durumdadır. Lütfen yöneticinizle iletişime geçiniz.", "TENANT_INACTIVE");
+            }
+
+            var tenantName = tenant?.Name ?? "Bilinmeyen Şirket";
+
+            var token = _jwtService.GenerateToken(user, roles, tenantName);
             
             return BaseResponse<TokenDto>.Success(token, "Giriş başarılı.");
         }

@@ -74,6 +74,12 @@ namespace TalepAuthentication.Migrations
                             Id = 5,
                             Name = "Staff",
                             NormalizedName = "STAFF"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
                         });
                 });
 
@@ -165,6 +171,11 @@ namespace TalepAuthentication.Migrations
                         {
                             UserId = 4,
                             RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 99,
+                            RoleId = 99
                         });
                 });
 
@@ -185,6 +196,39 @@ namespace TalepAuthentication.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens", (string)null);
+                });
+
+            modelBuilder.Entity("TalepAuthentication.Entities.Tenant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tenants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAtUtc = new DateTime(2026, 1, 22, 20, 53, 55, 83, DateTimeKind.Utc).AddTicks(5926),
+                            IsActive = true,
+                            Name = "Talep360 Host"
+                        });
                 });
 
             modelBuilder.Entity("TalepAuthentication.Entities.User", b =>
@@ -254,6 +298,9 @@ namespace TalepAuthentication.Migrations
                     b.Property<int>("TenantId")
                         .HasColumnType("integer");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -277,8 +324,8 @@ namespace TalepAuthentication.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "535176a5-9045-424a-9a64-27210cade00c",
-                            CreatedAtUtc = new DateTime(2026, 1, 20, 12, 18, 22, 495, DateTimeKind.Utc).AddTicks(191),
+                            ConcurrencyStamp = "5fe59eda-32d0-461c-b93f-967894fe8244",
+                            CreatedAtUtc = new DateTime(2026, 1, 22, 20, 53, 55, 83, DateTimeKind.Utc).AddTicks(5995),
                             Email = "admin@talep360.com",
                             EmailConfirmed = true,
                             FullName = "System Admin",
@@ -287,12 +334,33 @@ namespace TalepAuthentication.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@TALEP360.COM",
                             NormalizedUserName = "ADMIN@TALEP360.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEGyLhMbtGnzL3cGM1gILGoX8FFrVpqHCpxOxBqBHodh4eGrx/pqw9hmaHXzIXfw3lA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENXATZONQi7JRKRlddo8M4g1osOtC9GhG12NJJufomU6tT3v+HVyRXkGtgo80j1Nrw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "92c9dc2e-cfa2-43cb-ad82-208a6a32ec3a",
+                            SecurityStamp = "6d30cb7e-9203-4bd5-866f-25876f2d3d25",
                             TenantId = 1,
                             TwoFactorEnabled = false,
                             UserName = "admin@talep360.com"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "59b54b5c-ee2b-417b-87ed-15842766e0e3",
+                            CreatedAtUtc = new DateTime(2026, 1, 22, 20, 53, 55, 153, DateTimeKind.Utc).AddTicks(4936),
+                            Email = "superadmin@talep360.com",
+                            EmailConfirmed = true,
+                            FullName = "Super Administrator",
+                            IsActive = true,
+                            IsDeleted = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "SUPERADMIN@TALEP360.COM",
+                            NormalizedUserName = "SUPERADMIN@TALEP360.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAEJ/VdRroR2TvIPYhIslpiAxE+i+GFLCFsvNWQbgRY0xwOi5MB/1QtCQGLP6K3Ialwg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "02504ebc-fda3-4489-9cfa-9cd8da9db551",
+                            TenantId = 1,
+                            TwoFactorEnabled = false,
+                            UserName = "superadmin@talep360.com"
                         });
                 });
 

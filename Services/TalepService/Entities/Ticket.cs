@@ -12,6 +12,8 @@ namespace TalepService.Entities
         public TicketStatus Status { get; set; }
         public int CreatedBy { get; set; } // IdentityService'den gelecek User Id
         public int? AssignedTo { get; set; } // Atanan personel Id
+        public bool? IsAssignmentApproved { get; set; } // Personel atamayı kabul etti mi?
+        public string? RejectReason { get; set; } // Reddedilme nedeni
         public DateTime CreatedAtUtc { get; set; } = DateTime.UtcNow;
         public DateTime? ClosedAtUtc { get; set; }
         public bool IsDeleted { get; set; } = false;

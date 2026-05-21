@@ -27,5 +27,29 @@ namespace TalepService.Repositories
                             (t.Status == TicketStatus.Open || t.Status == TicketStatus.InProgress))
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Ticket>> GetByTenantIdAsync(int tenantId)
+        {
+            return await _context.Tickets
+                .Where(t => t.TenantId == tenantId && !t.IsDeleted)
+                .OrderByDescending(t => t.CreatedAtUtc)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Ticket>> GetByCreatedByAsync(int userId)
+        {
+            return await _context.Tickets
+                .Where(t => t.CreatedBy == userId && !t.IsDeleted)
+                .OrderByDescending(t => t.CreatedAtUtc)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Ticket>> GetByAssignedToAsync(int userId)
+        {
+            return await _context.Tickets
+                .Where(t => t.AssignedTo == userId && !t.IsDeleted)
+                .OrderByDescending(t => t.CreatedAtUtc)
+                .ToListAsync();
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace TalepAuthentication.Services
             _jwtSettings = jwtSettings.Value;
         }
 
-        public TokenDto GenerateToken(User user, IList<string> roles)
+        public TokenDto GenerateToken(User user, IList<string> roles, string tenantName)
         {
             var key = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
 
@@ -28,7 +28,8 @@ namespace TalepAuthentication.Services
                 new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email ?? ""),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("TenantId", user.TenantId.ToString())
+                new Claim("TenantId", user.TenantId.ToString()),
+                new Claim("TenantName", tenantName)
             };
 
             // Add roles to claims
@@ -52,7 +53,13 @@ namespace TalepAuthentication.Services
             return new TokenDto
             {
                 AccessToken = tokenHandler.WriteToken(token),
-                Expiration = tokenDescriptor.Expires.Value
+                Expiration = tokenDescriptor.Expires.Value,
+                Roles = roles,
+                UserId = user.Id,
+                FullName = user.FullName,
+                Email = user.Email ?? "",
+                TenantId = user.TenantId,
+                TenantName = tenantName
             };
         }
     }

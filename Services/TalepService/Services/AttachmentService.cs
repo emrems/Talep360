@@ -80,6 +80,14 @@ namespace TalepService.Services
                 throw new NotFoundException($"Id {id} olan dosya bulunamadı.");
             }
 
+            // Güvenlik Kontrolü: Bu attachment'ın bağlı olduğu ticket bu tenant'a mı ait?
+            var ticket = await _ticketRepository.GetByIdAsync(attachment.TicketId);
+            if (ticket == null)
+            {
+                // Ticket bu tenant'a ait değilse veya silinmişse, attachment'ı da silme/gösterme yetkisi yok sayalım.
+                throw new NotFoundException($"Id {id} olan dosya bulunamadı."); 
+            }
+
             // Hard delete mi Soft delete mi? Entity'de IsDeleted var, soft delete yapalım.
             attachment.IsDeleted = true;
             await _attachmentRepository.UpdateAsync(attachment);
